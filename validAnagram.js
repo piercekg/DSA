@@ -2,7 +2,27 @@
 Frequency Counter - validAnagram
 Given two strings, write a function to determine if the second string is an anagram of the first. You may assume the string contains only lowercase alphabets.
 */
+function validAnagram(str1, str2){
+  if (str1.length !== str2.length) {
+    return false;
+  }
 
+  let chars = {};
+  for (let char of str1) {
+    chars[char] ? chars[char] ++ : chars[char] = 1;
+  }
+
+  for (let char of str2) {
+    if (!chars[char]) {
+      return false;
+    } else {
+      chars[char] --;
+    }
+  }
+  return true;
+};
+
+/*
 function validAnagram(str1, str2){
   if (str1.length !== str2.length) {
     return false;
@@ -24,6 +44,7 @@ function validAnagram(str1, str2){
   }
   return true;
 };
+*/
 /*
 var result = validAnagram('', '');
 console.log(result);
