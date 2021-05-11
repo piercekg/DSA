@@ -12,7 +12,7 @@ function nestedEvenSum (obj, sum = 0) {
     }
   }
   return sum;
-}
+};
 /*
 var obj1 = {
   outer: 2,
