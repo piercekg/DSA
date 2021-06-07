@@ -148,6 +148,19 @@ class DoublyLinkedList {
     this.length --;
     return removed;
   }
+
+  reverse() {
+    let current = this.head;
+    this.head = this.tail;
+    this.tail = current;
+    while (current) {
+      let temp = current.prev;
+      current.prev = current.next;
+      current.next = temp;
+      current = current.prev;
+    }
+    return this;
+  }
 }
 
 let list = new DoublyLinkedList();
@@ -156,9 +169,9 @@ list.push(3);
 list.push(7);
 list.push(8);
 //console.log(list.shift())
-list.unshift(5);
-list.unshift(6);
-list.unshift(4);
-list.unshift(9);
+//list.unshift(5);
+//list.unshift(6);
+//list.unshift(4);
+//list.unshift(9);
 //console.log(list.insert(5, 1));
-console.log(list.remove(28))
+console.log(list.reverse())
