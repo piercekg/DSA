@@ -29,18 +29,83 @@ class Graph {
     }
     delete this.adjacencyList[vertex];
   }
+
+  depthFirstRecursive(start) {
+    let results = [];
+    let visited = {};
+    const helper = (vertex) => {
+      if (!vertex) {
+        return null;
+      }
+      results.push(vertex);
+      visited[vertex] = true;
+      this.adjacencyList[vertex].forEach(neighbor => {
+        if (!visited[neighbor]) {
+          return helper(neighbor);
+        }
+      });
+    };
+    helper(start);
+    return results;
+  }
+
+  depthFirstIterative(start) {
+    let stack = [start];
+    let results = [];
+    let visited = {};
+    visited[start] = true;
+    let vertex;
+    while (stack.length) {
+      vertex = stack.pop();
+      results.push(vertex);
+      this.adjacencyList[vertex].forEach(neighbor => {
+        if (!visited[neighbor]) {
+          stack.push(neighbor);
+          visited[neighbor] = true;
+        }
+      });
+    }
+    return results;
+  }
+
+  breadthFirst(start) {
+    let queue = [start];
+    let results = [];
+    let visited = {};
+    visited[start] = true;
+    let vertex;
+    while (queue.length) {
+      vertex = queue.shift();
+      results.push(vertex);
+      this.adjacencyList[vertex].forEach(neighbor => {
+        if (!visited[neighbor]) {
+          queue.push(neighbor);
+          visited[neighbor] = true;
+        }
+      });
+    }
+    return results;
+  }
 }
 
 let graph = new Graph();
-graph.addVertex('pizza');
-graph.addVertex(12);
-graph.addVertex(13);
-graph.addEdge('pizza', 12);
-graph.addEdge('pizza', 13);
-graph.addEdge(13, 12);
-console.log(graph);
-graph.removeVertex('pizza');
-console.log(graph);
+graph.addVertex('a');
+graph.addVertex('b');
+graph.addVertex('c');
+graph.addVertex('d');
+graph.addVertex('e');
+graph.addVertex('f');
+graph.addEdge('a', 'b');
+graph.addEdge('a', 'c');
+graph.addEdge('b', 'd');
+graph.addEdge('c', 'e');
+graph.addEdge('d', 'e');
+graph.addEdge('d', 'f');
+graph.addEdge('e', 'f');
+//console.log(graph.depthFirstRecursive('d'));
+console.log(graph.depthFirstIterative('a'));
+console.log(graph.breadthFirst('a'));
+
 
 /*
 removeEdge(v1, v2) {
